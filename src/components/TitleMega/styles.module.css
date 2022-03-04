@@ -1,0 +1,9 @@
+.titleMega {
+    display: flex;
+    align-items: center;
+}
+
+.titleMega h1{
+    color: #ffffff;
+    margin-left: 1rem;
+}

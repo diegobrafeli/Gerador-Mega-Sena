@@ -1,0 +1,13 @@
+.buttonMega{
+    padding: 0.5rem 1rem;
+    background: rgb(255, 238, 0);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    transition: filter 0.2;
+    border-radius: 0.25rem;
+ }
+ 
+ .buttonMega:hover,
+ .buttonMega:active{
+     filter: brightness(0.8);
+ }

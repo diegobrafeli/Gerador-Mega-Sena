@@ -1,0 +1,11 @@
+.buttonAmount {
+    padding: 0 1rem;
+    transition: filter 0.2s;
+    font-weight: bold;
+}
+
+/* .buttonAmount:focus, */
+.buttonAmount:active,
+.buttonAmount:hover {
+   filter:brightness(0.8)
+}

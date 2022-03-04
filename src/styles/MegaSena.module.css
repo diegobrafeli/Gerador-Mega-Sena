@@ -1,0 +1,29 @@
+.main {
+    height: 100vh;
+    width: 100%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: #009F44;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    border-radius: 0.25rem;
+    padding: 1rem;
+}
+
+
+
+
+.controleMega {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
