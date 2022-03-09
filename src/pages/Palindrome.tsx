@@ -192,6 +192,18 @@ export default function Palindrome(){
             (Number(arrayEndIndex[i]) - Number(arrayStartIndex[i]) + 1) ?
             false : testArrays.failedSubs = true
         }
+
+        let errorText= ""
+
+        Object.keys(testArrays).forEach((key) => {
+            //console.log(testArrays[key]);
+            testArrays[key] ? (errorText += key +", ") : false
+        });
+
+        if(errorText !== ""){
+            alert(errorText)
+        }
+
         
         //console.log(testArrays)
 
