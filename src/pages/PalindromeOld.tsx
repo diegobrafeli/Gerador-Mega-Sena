@@ -1,4 +1,6 @@
+import { wrap } from "module";
 import { useState } from "react";
+import { checkServerIdentity } from "tls";
 
 export default function Palindrome(){
 
@@ -34,64 +36,112 @@ export default function Palindrome(){
     const [palindromeSub, setPalindromeSub] = useState<string>("");
 
 
-    const isPalindrome = (arrayTest:string[], sub:number) =>{
+    const isPalindrome = (arrayTest:string[]) =>{
 
-        const numberLetters  = {
-            pair : 0,
-            odd : 0
-        }
+        const sizeArray = arrayTest.length;
+        const halfArray = Math.floor(sizeArray/2);
+        let test = true;
 
-        let test = false
+        if( halfArray === 0) return test = true 
 
-        const sizeArray = arrayTest.length
-
-        arrayTest.sort()
-
-        arrayTest.forEach((item, index, array)=>{
-
-            //the last letter of array or the group
-            if(index === sizeArray - 1 || item !== array[index + 1]){
-
-                numberLetters[item] ? numberLetters[item]++ : numberLetters[item] = 1;
-
-                (numberLetters[item] % 2 === 0) ?
-                numberLetters.pair += numberLetters[item] :
-                numberLetters.odd += numberLetters[item];
-                console.log("pair:",numberLetters.pair, "odd:",numberLetters.odd);
-                
-            } else {
-                numberLetters[item] ? numberLetters[item]++ : numberLetters[item] = 1;
-            }
-        })
-
-        if(sizeArray % 2 === 0 && sizeArray === numberLetters.pair){
-            test = true
-        } else if(sizeArray % 2 !== 0 && (sizeArray === numberLetters.pair + 1)){
-            test = true
-        }
-        
-        if( sub > 0 && !test){
-            if(sub >= Math.ceil(numberLetters.odd/2) && sizeArray % 2 === 0)
-            {
-                test = true
-            }
-            else if(sub >= Math.ceil((numberLetters.odd - 1)/2) && sizeArray % 2 !== 0){
-                test = true
+        for (let i = 0; i < halfArray; i++) {
+            if(arrayTest[i] !== arrayTest[sizeArray - (i+1)]){
+                test = false;
             }
         }
-
-
-        console.log(numberLetters);
-        
 
         return test
     }
 
+    const checkAnagram = (arrayTestFixed:string[], arrayTestVariable:string[]):boolean =>{
+
+        let arrayFixed:string[] = []
+        let arrayVariable:string[] = []
+        
+        let test = false;
+
+        for (let index = 0; index < arrayTestVariable.length; index++) {
+            
+            if(test) break
+
+            arrayFixed = [...arrayTestFixed, arrayTestVariable[index]]
+            arrayVariable = [...arrayTestVariable]
+            arrayVariable.splice(index,1)
+
+            //console.log("anagramInitial", test,"arrayFixed",arrayFixed,"arrayVariable",arrayVariable);
+
+            
+            if(arrayVariable.length === 0){
+                //console.log("ok",arrayFixed,"arrayVariable",arrayVariable, "test",test)
+
+                if(isPalindrome(arrayFixed)){    
+                    
+                    //console.log("isPalindromeX:",1)
+                    test = true
+                    break
+                }
+                
+            } else {
+                //console.log("Recursive Anagram","arrayFixed",arrayFixed,"arrayVariable",arrayVariable);
+
+                if(checkAnagram(arrayFixed, arrayVariable)){
+                    test = true
+                    //entry lenght - 1 times after stop because for create a new string with recusive
+                    //console.log("anagramEnd", test,"arrayFixed",arrayFixed,"arrayVariable",arrayVariable, "test",test);
+                    break
+                }
+               
+            }
+            
+        }
+
+        return test
+
+    }
+
+
+    const changeLetter = (arrayForChange:string[] , numberOfChanges:number): boolean =>{
+
+        if( numberOfChanges == 0) return
+
+        let arrayChange = [...arrayForChange]
+        let test = false
+
+        numberOfChanges = numberOfChanges -1;
+
+        for (let i = 0; i < arrayForChange.length; i++) {
+       
+            if(test) break
+
+            for (let j = 0; j < arrayForChange.length; j++) {
+
+                if(arrayForChange[i] !== arrayForChange[j]){
+                    arrayChange = [...arrayForChange]
+                    arrayChange.splice(j,1,arrayForChange[i])
+                    //console.log("REPETECO",arrayChange,"isPalindrome:", isPalindrome(arrayChange),"q:", numberOfChanges + 1);
+
+                    if(isPalindrome(arrayChange)){
+                        test = true
+                        break
+                    }
+                    else if(checkAnagram([],arrayChange)){
+                        test = true
+                        break
+                    } else if(numberOfChanges  > 0) changeLetter(arrayChange,numberOfChanges)
+                }
+            }
+            
+        }
+
+        
+
+        return test
+    }
+   
    
 
     const palindromeChecker = (s: string, q: number, startArray: string, endArray: string, subArray: string) =>{
 
-        
 
         s = s.trim().toLowerCase()
 
@@ -163,12 +213,25 @@ export default function Palindrome(){
 
             arrayTest = arrayS.slice(Number(item),Number(arrayEndIndex[index])+1)
 
-            if(isPalindrome(arrayTest,Number(arraySubs[index]))){
+            //console.log("INICIAL",arrayTest,"isPalindrome:", isPalindrome(arrayTest),"sub",arraySubs[index])
+
+       
+            if(isPalindrome(arrayTest)){
                 arrayResult[index] = 1
+            }
+            else if(checkAnagram([],arrayTest)){
+                arrayResult[index] = 1
+            }
+            else{
+                if(changeLetter(arrayTest,Number(arraySubs[index])) ){
+                    arrayResult[index] = 1
+                }
             }
 
         });
 
+
+        
         
         setPalindromeResult(arrayResult);        
 
