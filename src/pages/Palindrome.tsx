@@ -2,7 +2,7 @@ import { wrap } from "module";
 import { useState } from "react";
 import { checkServerIdentity } from "tls";
 
-export default function Palindromo(){
+export default function Palindrome(){
 
     //Constraints
 
@@ -26,14 +26,14 @@ export default function Palindromo(){
     // 6- The next line contains an integer q, the size of the subs array.
     // 7- The next q lines each contain an element subs[i] where 0 ≤ i < q.
 
-    const [textPalindromo, setTextPalindromo] = useState("");
-    const [qPalindromo, setQPalindromo] = useState<number>(0);
+    const [textPalindrome, setTextPalindrome] = useState("");
+    const [qPalindrome, setQPalindrome] = useState<number>(0);
 
-    const [palindromoResult, setPalindromoResult] = useState([]);
+    const [palindromeResult, setPalindromeResult] = useState([]);
 
-    const [palindromoStart, setPalindromoStart] = useState<string>("");
-    const [palindromoEnd, setPalindromoEnd] = useState<string>("");
-    const [palindromoSub, setPalindromoSub] = useState<string>("");
+    const [palindromeStart, setPalindromeStart] = useState<string>("");
+    const [palindromeEnd, setPalindromeEnd] = useState<string>("");
+    const [palindromeSub, setPalindromeSub] = useState<string>("");
 
 
     const isPalindrome = (arrayTest:string[]) =>{
@@ -220,7 +220,7 @@ export default function Palindromo(){
 
         
         
-        setPalindromoResult(arrayResult);        
+        setPalindromeResult(arrayResult);        
 
     }
 
@@ -229,7 +229,7 @@ export default function Palindromo(){
     return(
         
         <div style={{display:"flex", marginTop: "1rem", flexDirection:"column",justifyContent:"center",  alignItems:"center"}}>
-            <h1>Palindromo</h1>
+            <h1>Palindrome</h1>
             
             <div style={{
                 display:"flex", textAlign:"left", flexDirection:"column",
@@ -239,55 +239,55 @@ export default function Palindromo(){
                 <label>Text</label>
                 <input 
                     type="text" 
-                    placeholder="Text Palindromo" 
-                    value={textPalindromo} 
-                    onChange={(e)=> setTextPalindromo(e.target.value)}
+                    placeholder="Text Palindrome" 
+                    value={textPalindrome} 
+                    onChange={(e)=> setTextPalindrome(e.target.value)}
                     style={{display:"flex",  marginBottom:"0.5rem"}}
                 />
-                <label>q</label>
+                <label>q (letter change number)</label>
                 <input 
                     type="number" 
                     placeholder="q size Arrays" 
-                    value={qPalindromo} 
-                    onChange={(e)=> setQPalindromo(Number(e.target.value))}
+                    value={qPalindrome} 
+                    onChange={(e)=> setQPalindrome(Number(e.target.value))}
                     style={{display:"flex", marginBottom:"0.5rem"}}
                 />
                 <label>Array Start</label>
                 <input 
                     type="text" 
                     placeholder="startIndex, ex: 1,1,2" 
-                    value={palindromoStart} 
-                    onChange={(e)=> setPalindromoStart(e.target.value)}
+                    value={palindromeStart} 
+                    onChange={(e)=> setPalindromeStart(e.target.value)}
                     style={{display:"flex", marginBottom:"0.5rem"}}
                 />
                 <label>Array End</label>
                 <input 
                     type="text" 
                     placeholder="endIndex, ex: 3,4,5" 
-                    value={palindromoEnd} 
-                    onChange={(e)=> setPalindromoEnd(e.target.value)}
+                    value={palindromeEnd} 
+                    onChange={(e)=> setPalindromeEnd(e.target.value)}
                     style={{display:"flex", marginBottom:"0.5rem"}}
                 />
                 <label>Array Sub</label>
                 <input 
                     type="text" 
                     placeholder="subIndex, ex: 1,1,0"
-                    value={palindromoSub} 
-                    onChange={(e)=> setPalindromoSub(e.target.value)}
+                    value={palindromeSub} 
+                    onChange={(e)=> setPalindromeSub(e.target.value)}
                     style={{display:"flex", marginBottom:"0.5rem"}}
                 />
 
 
 
                 <button 
-                    onClick={()=> palindromeChecker(textPalindromo, qPalindromo, palindromoStart, palindromoEnd, palindromoSub)}
+                    onClick={()=> palindromeChecker(textPalindrome, qPalindrome, palindromeStart, palindromeEnd, palindromeSub)}
                     style={{display:"flex", margin:"1rem 0", width:"50px"}}
                 >
                     Serch
                 </button>
                 <h2>Result:</h2>
 
-                <ul style={{display:"flex", marginTop:"1rem", alignItems:"center", justifyContent:"center", background:"#7c8fc47b"}}>{palindromoResult.map((item, index)=>{
+                <ul style={{display:"flex", marginTop:"1rem", alignItems:"center", justifyContent:"center", background:"#7c8fc47b"}}>{palindromeResult.map((item, index)=>{
                     const text = <li key={index} style={{display:"flex", minWidth: "2rem", justifyContent:"center"}}>{item}</li>
                     return(text)
                 })}</ul>
