@@ -202,6 +202,7 @@ export default function Palindrome(){
 
         if(errorText !== ""){
             alert(errorText)
+            return
         }
 
         
