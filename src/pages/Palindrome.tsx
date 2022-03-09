@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Palindrome(){
 
@@ -57,7 +57,7 @@ export default function Palindrome(){
                 (numberLetters[item] % 2 === 0) ?
                 numberLetters.pair += numberLetters[item] :
                 numberLetters.odd += numberLetters[item];
-                console.log("pair:",numberLetters.pair, "odd:",numberLetters.odd);
+                //console.log("pair:",numberLetters.pair, "odd:",numberLetters.odd);
                 
             } else {
                 numberLetters[item] ? numberLetters[item]++ : numberLetters[item] = 1;
@@ -81,7 +81,7 @@ export default function Palindrome(){
         }
 
 
-        console.log(numberLetters);
+        //console.log(numberLetters);
         
 
         return test
@@ -173,6 +173,10 @@ export default function Palindrome(){
         setPalindromeResult(arrayResult);        
 
     }
+
+    useEffect(()=>{
+        setPalindromeResult([]);
+    },[textPalindrome,qPalindrome,palindromeStart,palindromeEnd,palindromeSub])
 
 
 
