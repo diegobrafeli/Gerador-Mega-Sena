@@ -244,7 +244,7 @@ export default function Palindrome(){
                     onChange={(e)=> setTextPalindrome(e.target.value)}
                     style={{display:"flex",  marginBottom:"0.5rem"}}
                 />
-                <label>q (letter change number)</label>
+                <label>q (size of arrays)</label>
                 <input 
                     type="number" 
                     placeholder="q size Arrays" 
